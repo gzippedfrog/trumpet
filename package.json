@@ -1,0 +1,6 @@
+{
+  "name": "blog-php",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
