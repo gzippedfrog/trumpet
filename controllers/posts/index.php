@@ -7,12 +7,15 @@ $db = App::resolve(Database::class);
 
 $stmt = 'SELECT 
             posts.id, 
-            posts.body, 
-            posts.likes, 
-            users.username AS author_username
+            posts.text, 
+            users.username AS author_username,
+            COUNT(likes.post_id) AS likes
          FROM posts
          JOIN users
          ON posts.author_id = users.id
+         LEFT JOIN likes
+         ON posts.id = likes.post_id
+         GROUP BY posts.id
          ORDER BY posts.id DESC';
 
 $posts = $db->query($stmt)->fetchAll();
