@@ -22,12 +22,17 @@
     <div class="mb-3 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="font-bold text-black dark:text-gray-500">@<?= $post["author_username"] ?></div>
         <div class="mb-3 font-normal text-gray-700 dark:text-white"><?= $post["text"] ?></div>
-        <a href="like/<?= $post['id'] ?>" class="flex gap-1 items-center dark:text-white">
-            <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-            <span><?= $post['likes'] ?></span>
-        </a>
+        <form method="POST" action="/like" class="dark:text-white">
+            <input type="hidden" name="_method" value=<?= $post['liked'] ? 'DELETE' : 'POST' ?>>
+            <input type="hidden" name="post_id" value=<?= $post['id'] ?>>
+            <input type="hidden" name="user_id" value=<?= $_SESSION['user_id'] ?>>
+            <button type="submit" class="flex gap-1 items-center">
+                <svg aria-hidden="true" fill="<?= $post['liked'] ? 'currentColor' : 'none' ?>" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span><?= $post['likes'] ?></span>
+            </button>
+        </form>
     </div>
 <?php endforeach; ?>
 

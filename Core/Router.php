@@ -33,7 +33,7 @@ class Router
 
     public function delete($uri, $controller)
     {
-        return $this->add('GET', $uri, $controller);
+        return $this->add('DELETE', $uri, $controller);
     }
 
     public function only($key)
