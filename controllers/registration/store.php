@@ -4,11 +4,6 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 
-if (isset($_SESSION['user_id'])) {
-    header('Location: /');
-    exit();
-}
-
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -33,7 +28,7 @@ $stmt = 'INSERT INTO users (username, password)
 
 $db->query($stmt, compact('username', 'password'));
 
-$_SESSION['user_id'] = $db->connection->lastInsertId();
+$_SESSION['id'] = (int) $db->connection->lastInsertId();
 $_SESSION['username'] = $username;
 
 header('Location: /');

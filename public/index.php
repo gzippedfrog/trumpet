@@ -1,5 +1,17 @@
 <?php
 
+/* 
+    TODO:
+
+    - SANITIZE USER INPUT
+    - PASSWORD HASHING
+    - UPDATE ERROR PAGE
+    - REPLIES
+
+    + POST EDIT
+    + POST DELETION
+*/
+
 use Core\Router;
 
 const BASE_PATH = __DIR__ . '/../';

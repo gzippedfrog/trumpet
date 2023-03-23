@@ -16,7 +16,7 @@ $stmt = 'SELECT *
 $user = $db->query($stmt, compact('username', 'password'))->fetch();
 
 if (!empty($user)) {
-    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
 
     header('Location: /');

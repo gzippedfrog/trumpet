@@ -21,11 +21,16 @@
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400">
                         <?php if (isset($_SESSION['username'])) : ?>
-                            <li class="font-bold">Hi, <span class="text-blue-700 dark:text-white"><?= $_SESSION['username'] ?></span></li>
-                            <li class="font-bold hover:text-blue-700"><a href="/logout">Log out</a></li>
+                            <li>Hi, <span class="text-blue-700 dark:text-white"><?= $_SESSION['username'] ?></span></li>
+                            <li class="hover:text-blue-700 cursor-pointer">
+                                <form method="POST" action="/session">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit">Log out</button>
+                                </form>
+                            </li>
                         <?php else : ?>
-                            <li class="font-bold hover:text-blue-700"><a href="/register">Register</a></li>
-                            <li class="font-bold hover:text-blue-700"><a href="/login">Log in</a></li>
+                            <li class="hover:text-blue-700"><a href="/register">Register</a></li>
+                            <li class="hover:text-blue-700"><a href="/login">Log in</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -34,4 +39,4 @@
     </header>
 
     <!-- MAIN SECTION -->
-    <main class="p-3 flex flex-col flex-1 max-w-3xl w-full mx-auto">
+    <main class="p-3 flex flex-col flex-1 max-w-xl w-full mx-auto">

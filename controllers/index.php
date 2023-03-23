@@ -5,8 +5,6 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$user_id = $_SESSION['user_id'];
-
 $stmt = "SELECT
    posts.id,
    posts.text,
@@ -27,6 +25,11 @@ GROUP BY
 ORDER BY
    posts.id DESC";
 
-$posts = $db->query($stmt, compact('user_id'))->fetchAll();
+$posts = $db->query(
+   $stmt,
+   ['user_id' => $_SESSION['id']]
+)->fetchAll();
 
-view('index', compact('posts'));
+// $errors = [];
+
+view('index', compact('posts', 'errors'));

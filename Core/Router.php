@@ -36,6 +36,11 @@ class Router
         return $this->add('DELETE', $uri, $controller);
     }
 
+    public function patch($uri, $controller)
+    {
+        return $this->add('PATCH', $uri, $controller);
+    }
+
     public function only($key)
     {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;

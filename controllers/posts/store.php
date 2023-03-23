@@ -10,11 +10,11 @@ $author_id = $_POST['author_id'];
 $errors = [];
 
 if (!Validator::string($text, 1, 255)) {
-    $errors['username'] = 'Please enter a post between 100 and 255 characters';
+    $errors['text'] = 'Please enter a post between 1 and 255 characters';
 }
 
 if (!empty($errors)) {
-    return view('posts/index', compact('errors', 'text'));
+    return view('index', compact('errors', 'text'));
 }
 
 $db = App::resolve(Database::class);
