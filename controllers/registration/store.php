@@ -26,7 +26,13 @@ $db = App::resolve(Database::class);
 $stmt = 'INSERT INTO users (username, password)
          VALUES (:username, :password)';
 
-$db->query($stmt, compact('username', 'password'));
+$db->query(
+    $stmt,
+    [
+        'username' => $username,
+        'password' => password_hash($password, PASSWORD_DEFAULT)
+    ]
+);
 
 $_SESSION['id'] = (int) $db->connection->lastInsertId();
 $_SESSION['username'] = $username;

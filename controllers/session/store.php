@@ -10,12 +10,11 @@ $db = App::resolve(Database::class);
 
 $stmt = 'SELECT * 
          FROM users 
-         WHERE username = :username
-         AND password = :password';
+         WHERE username = :username';
 
-$user = $db->query($stmt, compact('username', 'password'))->fetch();
+$user = $db->query($stmt, compact('username'))->fetch();
 
-if (!empty($user)) {
+if (!empty($user) && password_verify($_POST['password'], $user['password'])) {
     $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
 
@@ -25,4 +24,4 @@ if (!empty($user)) {
 
 $errors = ['password' => "Couldn't find user with such username/password"];
 
-view('login', compact('username', 'errors'));
+view('session/create', compact('username', 'errors'));
