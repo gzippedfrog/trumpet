@@ -21,7 +21,7 @@
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400">
                         <?php if (isset($_SESSION['username'])) : ?>
-                            <li>Hi, <span class="text-blue-700 dark:text-white"><?= $_SESSION['username'] ?></span></li>
+                            <li>Hi, <span class="text-blue-700 dark:text-white"><?= htmlspecialchars($_SESSION['username']) ?></span></li>
                             <li class="hover:text-blue-700 cursor-pointer">
                                 <form method="POST" action="/session">
                                     <input type="hidden" name="_method" value="DELETE">

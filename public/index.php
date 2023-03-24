@@ -3,13 +3,13 @@
 /* 
     TODO:
 
-    - SANITIZE USER INPUT
     - PASSWORD HASHING
     - UPDATE ERROR PAGE
     - REPLIES
-
+    
     + POST EDIT
     + POST DELETION
+    + SANITIZE USER INPUT
 */
 
 use Core\Router;
