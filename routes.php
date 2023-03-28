@@ -2,11 +2,10 @@
 
 $router->get('/', 'index');
 
+$router->get('/posts/create', 'posts/create')->only('auth');
 $router->post('/posts', 'posts/store')->only('auth');
-
 $router->get('/posts/edit', 'posts/edit')->only('auth');
 $router->patch('/posts', 'posts/update')->only('auth');
-
 $router->delete('/posts', 'posts/destroy')->only('auth');
 
 $router->get('/register', 'registration/create')->only('guest');

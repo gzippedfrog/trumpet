@@ -4,8 +4,8 @@
     TODO:
 
     - UPDATE ERROR PAGE
-    - REPLIES
     
+    + REPLIES
     + PASSWORD HASHING
     + POST EDIT
     + POST DELETION

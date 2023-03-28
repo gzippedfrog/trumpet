@@ -6,6 +6,7 @@ use Core\Validator;
 
 $text = $_POST['text'];
 $author_id = $_POST['author_id'];
+$parent_post_id = $_POST['parent_post_id'] ?? NULL;
 
 $errors = [];
 
@@ -19,10 +20,10 @@ if (!empty($errors)) {
 
 $db = App::resolve(Database::class);
 
-$stmt = 'INSERT INTO posts (text, author_id)
-         VALUES (:text, :author_id)';
+$stmt = 'INSERT INTO posts (text, author_id, parent_post_id)
+         VALUES (:text, :author_id, :parent_post_id)';
 
-$db->query($stmt, compact('text', 'author_id'));
+$db->query($stmt, compact('text', 'author_id', 'parent_post_id'));
 
 header('Location: /');
 exit();

@@ -6,6 +6,7 @@ use Core\Database;
 $db = App::resolve(Database::class);
 
 $stmt = "SELECT
+   posts.parent_post_id,
    posts.id,
    posts.text,
    posts.author_id AS author_id,
@@ -28,8 +29,6 @@ ORDER BY
 $posts = $db->query(
    $stmt,
    ['user_id' => $_SESSION['id']]
-)->fetchAll();
-
-// $errors = [];
+)->fetchAll(PDO::FETCH_GROUP);
 
 view('index', compact('posts', 'errors'));
