@@ -2,23 +2,20 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator;
+use Http\Forms\LoginForm;
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$errors = [];
+$form = new LoginForm();
 
-if (!Validator::string($username, 4, 10)) {
-    $errors['username'] = 'Please enter a username between 4 and 10 characters';
-}
+if (!$form->validate($username, $password)) {
+    $errors = $form->getErrors();
 
-if (!Validator::string($password, 8, 50)) {
-    $errors['password'] = 'Please enter a password between 8 and 50 characters';
-}
-
-if (!empty($errors)) {
-    return view('registration/create', compact('errors', 'username', 'password'));
+    return view(
+        'registration/create',
+        compact('username', 'password', 'errors')
+    );
 }
 
 $db = App::resolve(Database::class);

@@ -14,7 +14,7 @@ $stmt = 'SELECT *
 
 $user = $db->query($stmt, compact('username'))->fetch();
 
-if (!empty($user) && password_verify($_POST['password'], $user['password'])) {
+if (!empty($user) && password_verify($password, $user['password'])) {
     $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
 

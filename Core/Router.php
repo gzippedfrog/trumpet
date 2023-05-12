@@ -13,7 +13,7 @@ class Router
     {
         $this->routes[] = [
             'uri' => $uri,
-            'controller' => "controllers/$controller.php",
+            'controller' => "Http/controllers/$controller.php",
             'method' => $method,
             'middleware' => null,
         ];

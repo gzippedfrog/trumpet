@@ -2,7 +2,7 @@
 
 <form method="POST" action="/posts" class="flex flex-col gap-5 mb-6">
     <input type="hidden" name="author_id" value=<?= $_SESSION["id"] ?>>
-    <input type="hidden" name="parent_post_id" value="<?= $parent_post_id ?>">
+    <input type="hidden" name="parent_id" value="<?= $parent_id ?>">
     <div class="dark:text-white text-lg font-bold">Create new reply</div>
 
     <textarea name="text" rows="4" placeholder="Write your thoughts here..." class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?= $post['text'] ?></textarea>
