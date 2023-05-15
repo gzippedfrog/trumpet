@@ -1,6 +1,7 @@
 <?php
 
-session_destroy();
+use Core\Session;
 
-header('Location: /');
-exit();
+Session::destroy();
+
+redirect('/');

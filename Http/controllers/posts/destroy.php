@@ -17,5 +17,4 @@ if ($post['author_id'] === $_SESSION['id']) {
     );
 }
 
-header('Location: /');
-exit();
+redirect('/');

@@ -21,7 +21,7 @@ ORDER BY posts.id DESC";
 
 $posts = $db->query(
    $stmt,
-   ['user_id' => $_SESSION['id']]
+   ['user_id' => array_key_exists('id', $_SESSION) ? $_SESSION['id'] : null]
 )->fetchAll(PDO::FETCH_GROUP);
 
-view('index', compact('posts', 'errors'));
+view('index', compact('posts'));

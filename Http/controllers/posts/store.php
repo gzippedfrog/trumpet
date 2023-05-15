@@ -15,7 +15,7 @@ if (!Validator::string($text, 1, 255)) {
 }
 
 if (!empty($errors)) {
-    return view('index', compact('errors', 'text'));
+    view('index', compact('errors', 'text'));
 }
 
 $db = App::resolve(Database::class);
@@ -25,5 +25,4 @@ $stmt = 'INSERT INTO posts (text, author_id, parent_id)
 
 $db->query($stmt, compact('text', 'author_id', 'parent_id'));
 
-header('Location: /');
-exit();
+redirect('/');

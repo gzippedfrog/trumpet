@@ -35,5 +35,4 @@ $db->query(
     compact('text', 'id')
 );
 
-header('Location: /');
-exit();
+redirect('/');

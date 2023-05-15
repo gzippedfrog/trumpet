@@ -13,5 +13,4 @@ $db->query(
     ]
 );
 
-header('Location: /');
-exit();
+redirect('/');

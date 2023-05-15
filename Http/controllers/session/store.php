@@ -1,27 +1,18 @@
 <?php
 
-use Core\App;
-use Core\Database;
+use Core\Authenticator;
+use Http\Forms\LoginForm;
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$form = LoginForm::validate([
+    'username' => $_POST['username'],
+    'password' => $_POST['password']
+]);
 
-$db = App::resolve(Database::class);
+$signedIn = (new Authenticator)->attempt($_POST['username'], $_POST['password']);
 
-$stmt = 'SELECT * 
-         FROM users 
-         WHERE username = :username';
-
-$user = $db->query($stmt, compact('username'))->fetch();
-
-if (!empty($user) && password_verify($password, $user['password'])) {
-    $_SESSION['id'] = $user['id'];
-    $_SESSION['username'] = $user['username'];
-
-    header('Location: /');
-    exit();
+if (!$signedIn) {
+    $form->setError('password', 'No matching account found for that username and password')
+        ->throw();
 }
 
-$errors = ['password' => "Couldn't find user with such username/password"];
-
-view('session/create', compact('username', 'errors'));
+redirect('/');

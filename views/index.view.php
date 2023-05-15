@@ -22,7 +22,7 @@
     <!-- POST REPLIES -->
     <?php if (array_key_exists($post['id'], $posts)) : ?>
         <?php foreach (array_reverse($posts[$post['id']]) as $post_reply) : ?>
-            <?php view("partials/post_reply_card", ['post' => $post_reply]) ?>
+            <?php view("partials/post_card", ['post' => $post_reply, 'isReply' => true]) ?>
         <?php endforeach; ?>
     <?php endif ?>
 <?php endforeach; ?>

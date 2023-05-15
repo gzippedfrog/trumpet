@@ -75,4 +75,9 @@ class Router
 
         exit();
     }
+
+    public function previousUrl()
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
 }
