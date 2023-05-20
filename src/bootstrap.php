@@ -9,7 +9,7 @@ session_start();
 $container = new Container();
 
 $container->bind(Database::class, function () {
-    $config = require base_path('../config.php');
+    $config = parse_ini_file('../config.ini');
 
     return new Database($config);
 });
