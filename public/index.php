@@ -6,7 +6,7 @@ use Core\Router;
 use Core\Session;
 use Core\ValidationException;
 
-const BASE_PATH = __DIR__ . '/../';
+const BASE_PATH = __DIR__ . '/../src/';
 
 require BASE_PATH . 'functions.php';
 
