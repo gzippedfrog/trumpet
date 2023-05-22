@@ -1,5 +1,9 @@
 <?php
 
+// TODO Implement post images
+// TODO Implement post edit modal
+// TODO Implement post delete modal
+
 declare(strict_types=1);
 
 use Core\Router;
