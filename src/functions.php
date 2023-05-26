@@ -1,4 +1,5 @@
 <?php
+use Core\Response;
 
 function dd($value)
 {
@@ -19,13 +20,37 @@ function view($path, $attributes = [])
     require base_path("views/$path.view.php");
 }
 
-function abort($code = 404, $message = 'Page not found')
+function abort($code = Response::NOT_FOUND)
 {
+    switch ($code) {
+        case Response::NOT_FOUND:
+            $message = 'Page not found';
+            break;
+        case Response::FORBIDDEN:
+            $message = 'You are not authorized for this action';
+            break;
+        default:
+            $message = '';
+            break;
+    }
+
     http_response_code($code);
 
-    view('error', compact('code', 'message'));
+    view('error', [
+        'code' => $code,
+        'message' => $message
+    ]);
 
     exit();
+}
+
+function authorize($condition, $status = Response::FORBIDDEN)
+{
+    if (!$condition) {
+        abort($status);
+    }
+
+    return true;
 }
 
 function redirect($path)

@@ -15,7 +15,7 @@
 
 <body class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
 
-    <nav class="w-full bg-gray-50 dark:text-white sticky top-0 shadow-sm">
+    <nav class="w-full bg-gray-50 dark:bg-gray-900 dark:text-white sticky top-0 shadow-sm">
         <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
             <a href="/" class="self-center text-2xl font-semibold whitespace-nowrap">Blog</a>
 

@@ -5,7 +5,8 @@
     <form method="POST" action="/posts" class="mb-6">
         <div class="dark:text-white text-lg font-bold mb-3">Crate new post</div>
         <textarea name="text" rows="4" placeholder="Write your thoughts here..."
-            class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?= old('text') ?></textarea>
+            class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required><?= old('text') ?></textarea>
 
         <?php if (flashed('errors')['text'] ?? false): ?>
             <div class="text-sm text-red-600 dark:text-red-500">
