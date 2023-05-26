@@ -15,26 +15,28 @@
 
 <body class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
 
-    <nav class="max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between p-4 dark:text-white">
-        <a href="/" class="self-center text-2xl font-semibold whitespace-nowrap">Blog</a>
+    <nav class="w-full bg-gray-50 dark:text-white sticky top-0 shadow-sm">
+        <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
+            <a href="/" class="self-center text-2xl font-semibold whitespace-nowrap">Blog</a>
 
-        <?php if (isset($_SESSION['username'])): ?>
-            <div>
-                Hi, <span class="text-blue-700 dark:text-blue-600 mr-6">
-                    <?= "@" . htmlspecialchars($_SESSION['username']) ?>
-                </span>
-                <form class="inline hover:text-blue-700 dark:hover:text-blue-600 cursor-pointer" method="POST"
-                    action="/session">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit">Log out</button>
-                </form>
-            </div>
-        <?php else: ?>
-            <div>
-                <a class="hover:text-blue-700 dark:hover:text-blue-600  mr-6" href="/register">Register</a>
-                <a class="hover:text-blue-700 dark:hover:text-blue-600" href="/login">Log in</a>
-            </div>
-        <?php endif; ?>
+            <?php if (isset($_SESSION['username'])): ?>
+                <div>
+                    Hi, <span class="text-blue-700 dark:text-blue-600 mr-6">
+                        <?= "@" . htmlspecialchars($_SESSION['username']) ?>
+                    </span>
+                    <form class="inline hover:text-blue-700 dark:hover:text-blue-600 cursor-pointer" method="POST"
+                        action="/session">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">Log out</button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <div>
+                    <a class="hover:text-blue-700 dark:hover:text-blue-600  mr-6" href="/register">Register</a>
+                    <a class="hover:text-blue-700 dark:hover:text-blue-600" href="/login">Log in</a>
+                </div>
+            <?php endif; ?>
+        </div>
     </nav>
 
     <main class="p-5 flex flex-col flex-1 max-w-xl w-full mx-auto">
