@@ -8,18 +8,17 @@
             ['post' => $post]
         ) ?>
     <?php else: ?>
-        <!-- FIXME change modal name -->
-        <?php view("partials/new_post_modal") ?>
+        <?php view("partials/post/create_modal") ?>
     <?php endif ?>
 <?php endif ?>
 
 <!-- Posts -->
 <?php foreach ($posts[''] as $post): ?>
-    <?php view("partials/post_card", ['post' => $post]) ?>
+    <?php view("partials/post/card", ['post' => $post]) ?>
     <!-- Post replies -->
     <?php if ($posts[$post['id']] ?? false): ?>
         <?php foreach (array_reverse($posts[$post['id']]) as $post_reply): ?>
-            <?php view("partials/post_card", [
+            <?php view("partials/post/card", [
                 'post' => $post_reply,
                 'isReply' => true
             ]) ?>
