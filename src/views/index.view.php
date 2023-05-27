@@ -1,9 +1,17 @@
 <?php view("partials/head") ?>
 
+<!-- Post modal -->
 <?php if ($_SESSION["id"] ?? false): ?>
-    <?php view("partials/new_post_modal") ?>
+    <?php if ($post ?? false): ?>
+        <?php view(
+            "partials/post/edit_modal",
+            ['post' => $post]
+        ) ?>
+    <?php else: ?>
+        <!-- FIXME change modal name -->
+        <?php view("partials/new_post_modal") ?>
+    <?php endif ?>
 <?php endif ?>
-
 
 <!-- Posts -->
 <?php foreach ($posts[''] as $post): ?>
