@@ -1,5 +1,5 @@
 {
-    "name": "gzippedfrog/blog-php",
+    "name": "gzippedfrog/trumpet",
     "autoload": {
         "psr-4": {
             "Core\\": "src/Core/",

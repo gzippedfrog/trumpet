@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
 --
--- Host: localhost    Database: blog_php
+-- Host: localhost    Database: trumpet
 -- ------------------------------------------------------
 -- Server version	8.0.33-0ubuntu0.22.04.2
 

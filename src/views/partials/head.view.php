@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= isset($title) ? "$title | " : '' ?>PHP blog
+        <?= isset($title) ? "$title | " : '' ?>Trumpet
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
 
     <nav class="w-full bg-gray-50 dark:bg-gray-900 dark:text-white sticky top-0 shadow-sm">
         <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
-            <a href="/" class="self-center text-2xl font-semibold whitespace-nowrap">Blog</a>
+            <a href="/" class="self-center text-2xl font-semibold whitespace-nowrap">Trumpet</a>
 
             <?php if (isset($_SESSION['username'])): ?>
                 <div>
