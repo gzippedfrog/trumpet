@@ -2,7 +2,6 @@
 
 // TODO Implement user images
 // ✓ TODO Implement post images
-// TODO Implement post delete modal
 // TODO Implement pagination (maybe)
 
 declare(strict_types=1);
