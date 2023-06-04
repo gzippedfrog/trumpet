@@ -2,7 +2,7 @@
     class="mb-3 bg-white rounded-lg shadow dark:text-white dark:bg-gray-800 dark:border-gray-200 <?= ($isReply ?? false) ? 'ml-10' : '' ?>">
     <?php if ($post['image'] ?? false): ?>
         <img class="rounded-t-lg max-h-96 w-full object-contain bg-gray-300 dark:bg-gray-500"
-            src="<?= "images/{$post['image']}" ?>" alt="" />
+            src="<?= "/images/{$post['image']}" ?>" alt="" />
     <?php endif ?>
 
     <div class="p-5">

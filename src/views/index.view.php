@@ -1,15 +1,7 @@
 <?php view("partials/head") ?>
 
-<!-- Post modal -->
-<?php if ($_SESSION["id"] ?? false): ?>
-    <?php if ($post ?? false): ?>
-        <?php view(
-            "partials/post/edit_modal",
-            ['post' => $post]
-        ) ?>
-    <?php else: ?>
-        <?php view("partials/post/create_modal") ?>
-    <?php endif ?>
+<?php if (isset($_SESSION["id"])): ?>
+    <?php view("partials/post/create_form") ?>
 <?php endif ?>
 
 <!-- Posts -->
@@ -25,5 +17,13 @@
         <?php endforeach; ?>
     <?php endif ?>
 <?php endforeach; ?>
+
+<!-- Post edit modal -->
+<?php if (isset($_SESSION["id"], $post_to_edit)): ?>
+    <?php view(
+        "partials/post/edit_modal",
+        ['post' => $post_to_edit]
+    ) ?>
+<?php endif ?>
 
 <?php view("partials/footer") ?>
