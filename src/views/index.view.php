@@ -1,14 +1,18 @@
 <?php view("partials/head") ?>
 
 <?php if (isset($_SESSION["id"])): ?>
-    <?php view("partials/post/create_form") ?>
+    <?php if (isset($post_to_edit)): ?>
+        <?php view("partials/post/edit_form", ['post' => $post_to_edit]) ?>
+    <?php else: ?>
+        <?php view("partials/post/create_form") ?>
+    <?php endif ?>
 <?php endif ?>
 
 <!-- Posts -->
 <?php foreach ($posts[''] as $post): ?>
     <?php view("partials/post/card", ['post' => $post]) ?>
-    <!-- Post replies -->
     <?php if ($posts[$post['id']] ?? false): ?>
+        <!-- Post replies -->
         <?php foreach (array_reverse($posts[$post['id']]) as $post_reply): ?>
             <?php view("partials/post/card", [
                 'post' => $post_reply,
@@ -17,13 +21,5 @@
         <?php endforeach; ?>
     <?php endif ?>
 <?php endforeach; ?>
-
-<!-- Post edit modal -->
-<?php if (isset($_SESSION["id"], $post_to_edit)): ?>
-    <?php view(
-        "partials/post/edit_modal",
-        ['post' => $post_to_edit]
-    ) ?>
-<?php endif ?>
 
 <?php view("partials/footer") ?>

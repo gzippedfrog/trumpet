@@ -1,21 +1,14 @@
 <form method="POST" action="/posts" enctype="multipart/form-data" class="space-y-6 mb-16">
-    <div>
-        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">What's on your mind?</h3>
-        <textarea name="text" rows="4"
-            class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            placeholder="Write your thoughts here..." required><?= old('text') ?></textarea>
-        <?php if (flashed('errors')['text'] ?? false): ?>
-            <div class="text-sm text-red-600 dark:text-red-500">
-                <?= flashed('errors')['text'] ?>
-            </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', (event) => {
-                    const modal = new Modal(document.getElementById('create-post-modal'));
-                    modal.show();
-                });
-            </script>
-        <?php endif; ?>
-    </div>
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create post</h3>
+    <textarea name="text" rows="4"
+        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        placeholder="Write your thoughts here..." required><?= old('text') ?></textarea>
+
+    <?php if (flashed('errors')['text'] ?? false): ?>
+        <div class="text-sm text-red-600 dark:text-red-500">
+            <?= flashed('errors')['text'] ?>
+        </div>
+    <?php endif; ?>
 
     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image_file_input">Upload
         image (optional)</label>
