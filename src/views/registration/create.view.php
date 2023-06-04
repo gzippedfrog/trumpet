@@ -27,6 +27,8 @@
                     </p>
                 <?php endif; ?>
             </div>
+
+            <!-- TODO add password confirmation -->
             <!-- <div>
                 <label for="confirm-password" class="block mb-2  text-gray-900 dark:text-white">Confirm
                     password</label>

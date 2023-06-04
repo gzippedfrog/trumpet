@@ -9,6 +9,7 @@ $stmt = "SELECT
    posts.parent_id,
    posts.id,
    posts.text,
+   posts.image,
    posts.author_id AS author_id,
    users.username AS author_username,
    COUNT(likes.user_id) AS likes,

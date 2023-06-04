@@ -1,3 +1,10 @@
+<!-- Modal toggle -->
+<button data-modal-target="create-post-modal" data-modal-show="create-post-modal"
+    class="inline-block max-w-max mb-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    type="button" on>
+    Create new post
+</button>
+
 <!-- Main modal -->
 <div id="create-post-modal" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -15,7 +22,7 @@
                 </svg>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <form method="POST" action="/posts" class="space-y-6">
+                <form method="POST" action="/posts" enctype="multipart/form-data" class="space-y-6">
                     <div>
                         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">What's on your mind?</h3>
                         <textarea name="text" rows="4"
@@ -34,6 +41,14 @@
                         <?php endif; ?>
                         <input type="hidden" name="author_id" value=<?= $_SESSION["id"] ?>>
                     </div>
+
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        for="image_file_input">Upload
+                        image (optional)</label>
+                    <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="image_file_input" name="image" type="file">
+
                     <button type="submit"
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </form>
@@ -41,9 +56,3 @@
         </div>
     </div>
 </div>
-<!-- Modal toggle -->
-<button data-modal-target="create-post-modal" data-modal-show="create-post-modal"
-    class="inline-block max-w-max mb-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    type="button" on>
-    Create new post
-</button>
