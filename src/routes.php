@@ -1,7 +1,6 @@
 <?php
 
-$router->get('/', 'index');
-
+$router->get('/', 'posts/index');
 $router->get('/posts/create', 'posts/create')->only('auth');
 $router->post('/posts', 'posts/store')->only('auth');
 $router->get('/posts/edit', 'posts/edit')->only('auth');
