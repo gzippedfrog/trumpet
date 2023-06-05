@@ -899,6 +899,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: 0.75rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1049,6 +1053,11 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-primary-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1144,6 +1153,10 @@ input[type="range"]::-ms-fill-lower {
   font-weight: 600;
 }
 
+.font-normal {
+  font-weight: 400;
+}
+
 .leading-tight {
   line-height: 1.25;
 }
@@ -1180,6 +1193,11 @@ input[type="range"]::-ms-fill-lower {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-primary-700 {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 
 .shadow {
@@ -1222,6 +1240,36 @@ input[type="range"]::-ms-fill-lower {
 .hover\:text-yellow-400:hover {
   --tw-text-opacity: 1;
   color: rgb(227 160 8 / var(--tw-text-opacity));
+}
+
+.hover\:text-pink-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(241 126 184 / var(--tw-text-opacity));
+}
+
+.hover\:text-red-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(249 128 128 / var(--tw-text-opacity));
+}
+
+.hover\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(224 36 36 / var(--tw-text-opacity));
+}
+
+.hover\:text-yellow-300:hover {
+  --tw-text-opacity: 1;
+  color: rgb(250 202 21 / var(--tw-text-opacity));
+}
+
+.hover\:text-primary-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+
+.hover\:text-red-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(240 82 82 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
@@ -1319,6 +1367,11 @@ input[type="range"]::-ms-fill-lower {
     background-color: rgb(79 70 229 / var(--tw-bg-opacity));
   }
 
+  .dark\:bg-primary-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+  }
+
   .dark\:text-gray-400 {
     --tw-text-opacity: 1;
     color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1342,6 +1395,16 @@ input[type="range"]::-ms-fill-lower {
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-gray-300 {
+    --tw-text-opacity: 1;
+    color: rgb(209 213 219 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-primary-400 {
+    --tw-text-opacity: 1;
+    color: rgb(129 140 248 / var(--tw-text-opacity));
   }
 
   .dark\:placeholder-gray-400::-moz-placeholder {
@@ -1377,6 +1440,61 @@ input[type="range"]::-ms-fill-lower {
   .dark\:hover\:text-yellow-500:hover {
     --tw-text-opacity: 1;
     color: rgb(194 120 3 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-yellow-400:hover {
+    --tw-text-opacity: 1;
+    color: rgb(227 160 8 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-pink-500:hover {
+    --tw-text-opacity: 1;
+    color: rgb(231 70 148 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-red-500:hover {
+    --tw-text-opacity: 1;
+    color: rgb(240 82 82 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-yellow-300:hover {
+    --tw-text-opacity: 1;
+    color: rgb(250 202 21 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-red-300:hover {
+    --tw-text-opacity: 1;
+    color: rgb(248 180 180 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-red-400:hover {
+    --tw-text-opacity: 1;
+    color: rgb(249 128 128 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-primary-500:hover {
+    --tw-text-opacity: 1;
+    color: rgb(99 102 241 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-primary-400:hover {
+    --tw-text-opacity: 1;
+    color: rgb(129 140 248 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-pink-400:hover {
+    --tw-text-opacity: 1;
+    color: rgb(241 126 184 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-yellow-200:hover {
+    --tw-text-opacity: 1;
+    color: rgb(252 233 106 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:text-pink-300:hover {
+    --tw-text-opacity: 1;
+    color: rgb(248 180 217 / var(--tw-text-opacity));
   }
 
   .dark\:focus\:border-primary-500:focus {
