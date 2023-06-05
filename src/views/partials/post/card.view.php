@@ -19,7 +19,7 @@
 
                 <?php if (!($isReply ?? false)): ?>
                     <a href="/posts/create?parent_id=<?= $post['id'] ?>"
-                        class="flex items-center hover:text-blue-700 dark:hover:text-blue-600">
+                        class="flex items-center hover:text-primary-700 dark:hover:text-primary-600">
                         Reply
                         <svg fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="inline ml-1">
@@ -32,7 +32,7 @@
 
                 <?php if ($_SESSION['id'] === $post['author_id']): ?>
                     <a href="/posts/edit?id=<?= $post['id'] ?>"
-                        class="flex items-center hover:text-yellow-700 dark:hover:text-yellow-600">
+                        class="flex items-center hover:text-yellow-400 dark:hover:text-yellow-500">
                         Edit
                         <svg fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="inline ml-1">
@@ -62,7 +62,7 @@
                     <?php endif ?>
 
                     <input type="hidden" name="id" value=<?= $post["id"] ?>>
-                    <button type="submit" class="flex items-center hover:text-pink-700 dark:hover:text-pink-600">
+                    <button type="submit" class="flex items-center hover:text-pink-500 dark:hover:text-pink-600">
                         Like
                         <svg aria-hidden="true" fill="<?= $post["liked"] ? "currentColor" : "none" ?>" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"
