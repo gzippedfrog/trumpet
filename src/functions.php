@@ -4,7 +4,7 @@ use Core\Response;
 function dd($value)
 {
     echo '<pre>';
-    var_dump($value);
+    var_export($value);
     echo '</pre>';
     exit();
 }
