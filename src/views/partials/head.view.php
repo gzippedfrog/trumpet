@@ -8,12 +8,10 @@
     <title>
         <?= isset($title) ? "$title | " : '' ?>Trumpet
     </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <link href="css/output.css" rel="stylesheet">
 </head>
 
 <body class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-
     <nav class="w-full bg-gray-50 dark:bg-gray-900 dark:text-white sticky top-0 shadow-sm">
         <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4">
             <a href="/" class="self-center text-2xl font-semibold whitespace-nowrap">Trumpet</a>
