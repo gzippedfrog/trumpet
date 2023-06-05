@@ -8,7 +8,7 @@
     <title>
         <?= isset($title) ? "$title | " : '' ?>Trumpet
     </title>
-    <link href="css/output.css" rel="stylesheet">
+    <link href="/css/output.css" rel="stylesheet">
 </head>
 
 <body class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900">
