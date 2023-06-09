@@ -24,7 +24,7 @@ VALUES (:text, :author_id, :parent_id, :image)';
 
 $db->query($stmt, [
     'text' => $_POST['text'],
-    'author_id' => $_SESSION['id'],
+    'author_id' => $_SESSION['id'] ?? '',
     'parent_id' => $_POST['parent_id'] ?? null,
     'image' => $file_name ?? null,
 ]);

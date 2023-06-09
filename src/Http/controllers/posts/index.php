@@ -1,31 +1,27 @@
 <?php
 
-use Core\App;
-use Core\Database;
+use Core\Paginator;
 
-$db = App::resolve(Database::class);
+$user_id = $_SESSION['id'] ?? null;
+$page = $_GET['page'] ?? null;
+$per_page = 4;
+$pages_total = getPages($per_page);
 
-$stmt = "SELECT
-   posts.parent_id,
-   posts.id,
-   posts.text,
-   posts.image,
-   posts.author_id AS author_id,
-   users.username AS author_username,
-   COUNT(likes.user_id) AS likes,
-   SUM(likes.user_id=:user_id) AS liked
-FROM posts
-JOIN users ON users.id = posts.author_id
-LEFT JOIN likes ON likes.post_id = posts.id
-GROUP BY posts.id
-ORDER BY posts.id DESC";
+if ($page < 1 || $page > $pages_total) {
+    $_GET['page'] = 1;
+    redirect('/?' . http_build_query($_GET));
+}
 
-$posts = $db->query(
-   $stmt,
-   ['user_id' => $_SESSION['id'] ?? null]
-)->fetchAll(PDO::FETCH_GROUP);
+$posts = getPosts($user_id, $page, $per_page);
+$post_ids = array_map(fn($post) => $post['id'], $posts);
+$replies = getReplies($post_ids, $user_id);
 
 view(
-   'index',
-   ['posts' => $posts]
+    'index',
+    [
+        'posts' => $posts,
+        'replies' => $replies,
+        'prevPageUrl' => Paginator::getPrevPageUrl($_GET),
+        'nextPageUrl' => Paginator::getNextPageUrl($_GET, $pages_total)
+    ]
 );

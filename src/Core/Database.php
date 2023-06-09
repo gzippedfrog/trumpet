@@ -24,7 +24,32 @@ class Database
     {
         $this->statement = $this->connection->prepare($stmt);
 
-        $this->statement->execute($params);
+        foreach ($params as $name => $value) {
+            if (is_array($value)) {
+                $this->statement->bindValue(":$name", $value[0], $value[1]);
+            } else {
+                $this->statement->bindValue(":$name", $value);
+            }
+        }
+
+        $this->statement->execute();
+
+        return $this->statement;
+    }
+
+    public function queryPositional($stmt, $params = [])
+    {
+        $this->statement = $this->connection->prepare($stmt);
+
+        foreach ($params as $i => $value) {
+            if (is_array($value)) {
+                $this->statement->bindValue($i + 1, $value[0], $value[1]);
+            } else {
+                $this->statement->bindValue($i + 1, $value);
+            }
+        }
+
+        $this->statement->execute();
 
         return $this->statement;
     }

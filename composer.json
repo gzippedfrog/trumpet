@@ -5,5 +5,5 @@
             "Core\\": "src/Core/",
             "Http\\": "src/Http/"
         }
-    }
+  }
 }
