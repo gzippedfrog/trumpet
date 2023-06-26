@@ -1,27 +1,39 @@
 <?php
 
+use Core\App;
 use Core\Paginator;
+use Core\Post;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 
-$user_id = $_SESSION['id'] ?? null;
-$page = $_GET['page'] ?? null;
 $per_page = 4;
-$pages_total = getPages($per_page);
+$page = $_GET['page'] ?? null;
+$user_id = $_SESSION['id'] ?? null;
+
+/** @var EntityManager $entityManager */
+$entityManager = App::resolve(EntityManager::class);
+
+$posts_total = $entityManager->getRepository(Post::class)->count(['parent' => null]);
+$pages_total = ceil($posts_total / $per_page);
 
 if ($page < 1 || $page > $pages_total) {
     $_GET['page'] = 1;
     redirect('/?' . http_build_query($_GET));
 }
 
-$posts = getPosts($user_id, $page, $per_page);
-$post_ids = array_map(fn($post) => $post['id'], $posts);
-$replies = getReplies($post_ids, $user_id);
+$dql = /** @lang DQL */
+    'SELECT p FROM ' . Post::class . ' p WHERE p.parent IS NULL ORDER BY p.id DESC';
+
+$query = $entityManager->createQuery($dql)
+    ->setFirstResult(($page - 1) * $per_page)
+    ->setMaxResults($per_page);
+
+$posts = new DoctrinePaginator($query, $fetchJoinCollection = true);
+
+$prevPageUrl = Paginator::getPrevPageUrl($_GET);
+$nextPageUrl = Paginator::getNextPageUrl($_GET, $pages_total);
 
 view(
     'index',
-    [
-        'posts' => $posts,
-        'replies' => $replies,
-        'prevPageUrl' => Paginator::getPrevPageUrl($_GET),
-        'nextPageUrl' => Paginator::getNextPageUrl($_GET, $pages_total)
-    ]
+    compact(['posts', 'page', 'user_id', 'prevPageUrl', 'nextPageUrl'])
 );

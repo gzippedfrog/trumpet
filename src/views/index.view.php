@@ -14,13 +14,14 @@
     <!-- Posts -->
     <div class="flex flex-col flex-1">
         <?php foreach ($posts as $post): ?>
-            <?php view("partials/post/card", ['post' => $post]) ?>
-            <?php if ($replies[$post['id']] ?? false): ?>
-                <?php foreach ($replies[$post['id']] as $reply): ?>
-                    <?php view("partials/post/card", [
-                        'post' => $reply,
-                        'isReply' => true
-                    ]) ?>
+            <?php view("partials/post/card",
+                compact('post', 'page', 'user_id')
+            ) ?>
+            <?php if ($post->replies ?? false): ?>
+                <?php foreach ($post->replies as $post): ?>
+                    <?php view("partials/post/card",
+                        compact('post', 'page', 'user_id')
+                    ) ?>
                 <?php endforeach; ?>
             <?php endif ?>
         <?php endforeach; ?>

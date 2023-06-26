@@ -1,26 +1,27 @@
 <?php
 
 use Core\App;
-use Core\Database;
+use Core\Post;
+use Doctrine\ORM\EntityManager;
 use Http\Forms\PostForm;
 
-PostForm::validate(['text' => $_POST['text']]);
+$page = $_GET['page'];
+$post_id = $_POST['id'];
+$post_text = $_POST['text'];
+$user_id = $_SESSION['id'];
 
-$db = App::resolve(Database::class);
+PostForm::validate(['text' => $post_text]);
 
-$post = $db->query(
-    'SELECT * from posts WHERE id = :id',
-    ['id' => $_POST['id']]
-)->fetch();
+/** @var EntityManager $entityManager */
+$entityManager = App::resolve(EntityManager::class);
 
-authorize($_SESSION['id'] === $post['author_id']);
+$post = $entityManager->find(Post::class, $post_id);
 
-$db->query(
-    'UPDATE posts SET text = :text WHERE id = :id',
-    [
-        'text' => $_POST['text'],
-        'id' => $_POST['id'],
-    ]
-);
+authorize($user_id === $post->author->id);
 
-redirect('/');
+$post->text = $post_text;
+
+$entityManager->persist($post);
+$entityManager->flush();
+
+redirect("/?page=$page");

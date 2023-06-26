@@ -1,24 +1,22 @@
 <?php
 
 use Core\App;
-use Core\Database;
+use Core\Post;
+use Doctrine\ORM\EntityManager;
 
-$db = App::resolve(Database::class);
+$page = $_GET['page'];
+$post_id = $_POST['id'];
+$user_id = $_SESSION['id'];
 
-$post = $db->query(
-    'SELECT * from posts where id = :id',
-    [
-        'id' => $_POST['id']
-    ]
-)->fetch();
+/** @var EntityManager $entityManager */
+$entityManager = App::resolve(EntityManager::class);
 
-authorize($_SESSION['id'] === $post['author_id']);
+$post = $entityManager->find(Post::class, $post_id);
 
-$db->query(
-    'DELETE FROM posts where id = :id',
-    [
-        'id' => $_POST['id']
-    ]
-);
+echo "{$user_id}, {$post->author->id}";
+authorize($user_id === $post->author->id);
 
-redirect('/');
+$entityManager->remove($post);
+$entityManager->flush();
+
+redirect("/?page=$page");

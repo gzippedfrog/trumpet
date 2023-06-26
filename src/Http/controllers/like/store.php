@@ -1,16 +1,23 @@
 <?php
 
 use Core\App;
-use Core\Database;
+use Core\Post;
+use Core\User;
+use Doctrine\ORM\EntityManager;
 
-$db = App::resolve(Database::class);
+$page = $_GET['page'];
+$post_id = $_POST['id'];
+$user_id = $_SESSION['id'];
 
-$db->query(
-    'INSERT INTO likes (user_id, post_id) VALUES (:user_id, :post_id)',
-    [
-        'user_id' => $_SESSION['id'],
-        'post_id' => $_POST['id']
-    ]
-);
+/** @var EntityManager $entityManager */
+$entityManager = App::resolve(EntityManager::class);
 
-redirect('/');
+$post = $entityManager->find(Post::class, $post_id);
+$user = $entityManager->find(User::class, $user_id);
+
+$post->addLike($user);
+
+$entityManager->persist($post);
+$entityManager->flush();
+
+redirect("/?page=$page");

@@ -2,7 +2,8 @@
 
 // TODO Implement user images
 // ✓ TODO Implement post images
-// TODO Implement pagination (maybe)
+// ✓ TODO Implement pagination (maybe)
+//  TODO Add type declarations
 
 declare(strict_types=1);
 
@@ -12,9 +13,7 @@ use Core\ValidationException;
 
 const BASE_PATH = __DIR__ . '/../src/';
 
-require BASE_PATH . 'functions.php';
-require BASE_PATH . '../vendor/autoload.php';
-require base_path('bootstrap.php');
+require BASE_PATH . 'bootstrap.php';
 
 $router = new Router();
 $routes = require base_path('routes.php');
