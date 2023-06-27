@@ -71,3 +71,12 @@ function old($key, $default = '')
 {
     return Core\Session::get('old')[$key] ?? $default;
 }
+
+function validatePageNumber($page, $pages_total, $params)
+{
+    if ($page < 1 || $page > $pages_total) {
+        $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+        $params['page'] = 1;
+        redirect("$uri?" . http_build_query($params));
+    }
+}

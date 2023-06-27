@@ -13,7 +13,6 @@ $entityManager = App::resolve(EntityManager::class);
 
 $post = $entityManager->find(Post::class, $post_id);
 
-echo "{$user_id}, {$post->author->id}";
 authorize($user_id === $post->author->id);
 
 $entityManager->remove($post);
