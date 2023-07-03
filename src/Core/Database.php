@@ -3,13 +3,14 @@
 namespace Core;
 
 use PDO;
+use PDOStatement;
 
 class Database
 {
-    public $connection;
-    public $statement;
+    public PDO $connection;
+    public PDOStatement $statement;
 
-    public function __construct($config, $username = 'root', $password = '')
+    public function __construct(array $config, string $username = 'root', string $password = '')
     {
         $dsn = 'mysql:' . http_build_query($config, '', ';');
 
@@ -20,7 +21,7 @@ class Database
         ]);
     }
 
-    public function query($stmt, $params = [])
+    public function query(string $stmt, array $params = []): PDOStatement
     {
         $this->statement = $this->connection->prepare($stmt);
 
@@ -37,7 +38,7 @@ class Database
         return $this->statement;
     }
 
-    public function queryPositional($stmt, $params = [])
+    public function queryPositional(string $stmt, array $params = []): PDOStatement
     {
         $this->statement = $this->connection->prepare($stmt);
 

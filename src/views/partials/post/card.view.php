@@ -1,24 +1,32 @@
+<?php
+/**
+ * @var $user_id
+ * @var int $page
+ * @var Core\Post $post
+ */
+?>
+
 <div
-        class="mb-3 bg-white rounded-lg shadow dark:text-white dark:bg-gray-800 dark:border-gray-200 <?= ($post->parent ?? false) ? 'ml-10' : '' ?>">
-    <?php if ($post->image ?? false): ?>
+        class="mb-3 bg-white rounded-lg shadow dark:text-white dark:bg-gray-800 dark:border-gray-200 <?= $post->getParent() ? 'ml-10' : '' ?>">
+    <?php if ($post->getImage() ?? false): ?>
         <img class="rounded-t-lg max-h-96 w-full object-contain bg-gray-300 dark:bg-gray-500"
-             src="<?= "/images/{$post->image}" ?>" alt=""/>
+             src="<?= "/images/{$post->getImage()}" ?>" alt=""/>
     <?php endif ?>
 
     <div class="p-5">
         <div class="text-gray-500">
-            <?= '@' . htmlspecialchars($post->author->username) ?>
+            <?= '@' . htmlspecialchars($post->getAuthor()->getUsername()) ?>
         </div>
         <div>
-            <?= htmlspecialchars($post->text) ?>
+            <?= htmlspecialchars($post->getText()) ?>
         </div>
 
         <!-- Interaction buttons -->
         <div class="flex mt-3 gap-3">
             <?php if (isset($user_id)): ?>
-                <?php if (!($post->parent ?? false)): ?>
+                <?php if (!$post->getParent()): ?>
                     <!-- Reply Button -->
-                    <a href="/posts/create?parent_id=<?= $post->id ?>&page=<?= $page ?>"
+                    <a href="/posts/create?parent_id=<?= $post->getId() ?>&page=<?= $page ?>"
                        class="flex items-center hover:text-primary-500 dark:hover:text-primary-400">
                         Reply
                         <svg fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"
@@ -31,9 +39,9 @@
                     </a>
                 <?php endif ?>
 
-                <?php if ($user_id === $post->author->id): ?>
+                <?php if ($user_id === $post->getAuthor()->getId()): ?>
                     <!-- Edit Button -->
-                    <a href="/posts/edit?id=<?= $post->id ?>&page=<?= $page ?>"
+                    <a href="/posts/edit?id=<?= $post->getId() ?>&page=<?= $page ?>"
                        class="flex items-center hover:text-yellow-300 dark:hover:text-yellow-200">
                         Edit
                         <svg fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"
@@ -49,7 +57,7 @@
                     <form method="POST" action="<?= "/posts?" . http_build_query($_GET) ?>"
                           class="hover:text-red-600 dark:hover:text-red-400">
                         <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="id" value="<?= $post->id ?>">
+                        <input type="hidden" name="id" value="<?= $post->getId() ?>">
                         <button type="submit" class="flex items-center">
                             Delete
                             <svg fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"
@@ -69,7 +77,7 @@
                         <input type="hidden" name="_method" value="DELETE">
                     <?php endif ?>
 
-                    <input type="hidden" name="id" value=<?= $post->id ?>>
+                    <input type="hidden" name="id" value=<?= $post->getId() ?>>
                     <button type="submit" class="flex items-center hover:text-pink-400 dark:hover:text-pink-300">
                         Like
                         <svg aria-hidden="true" fill="<?= $post->isLikedBy($user_id) ? "currentColor" : "none" ?>"
@@ -81,7 +89,7 @@
                                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                                     stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
-                        <?= count($post->likedBy) ?>
+                        <?= count($post->getLikedBy()) ?>
                     </button>
                 </form>
 
@@ -89,7 +97,7 @@
                 <div class="flex items-center ml-auto dark:text-white">
                     Likes
                     <svg aria-hidden="true"
-                         fill="<?= $post->isLikedBy($user_id) ? "currentColor" : "none" ?>"
+                         fill="none"
                          stroke="currentColor"
                          stroke-width="1.5" viewBox="0 0 24 24" width="16" height="16"
                          xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +106,7 @@
                                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                                 stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <?= count($post->likedBy) ?>
+                    <?= count($post->getLikedBy()) ?>
                 </div>
             <?php endif ?>
         </div>

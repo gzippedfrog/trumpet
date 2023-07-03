@@ -15,29 +15,29 @@ class Post
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    public int|null $id = null;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string')]
-    public string $text;
+    private string $text;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'createdPosts')]
-    public User $author;
+    private User $author;
 
     #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'replies')]
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
-    public Post|null $parent = null;
+    private ?Post $parent = null;
 
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'parent')]
-    public Collection $replies;
+    private Collection $replies;
 
     #[ORM\Column(type: 'string')]
-    public string|null $image;
+    private string|null $image;
 
     #[ORM\JoinTable(name: 'likes')]
     #[ORM\JoinColumn(name: 'post_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'user_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: User::class)]
-    public Collection $likedBy;
+    private Collection $likedBy;
 
     public function __construct()
     {
@@ -45,26 +45,140 @@ class Post
         $this->likedBy = new ArrayCollection();
     }
 
-    public function isLikedBy($user_id)
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
     {
-        return $this->likedBy->exists(fn($i, $user) => $user->id == $user_id);
+        return $this->id;
     }
 
-    public function removeLike($user_id)
+    /**
+     * @return string
+     */
+    public function getText(): string
     {
-        $user = $this->likedBy->findFirst(fn($key, $user) => $user->id === $user_id);
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText(string $text): void
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $user
+     * @return void
+     */
+    public function setAuthor(User $user): void
+    {
+        $user->addPost($this);
+        $this->author = $user;
+    }
+
+    /**
+     * @return Post|null
+     */
+    public function getParent(): ?Post
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Post $post
+     * @return void
+     */
+    public function setParent(Post $post): void
+    {
+        $post->addReply($this);
+        $this->parent = $post;
+    }
+
+    public function addReply(Post $post): void
+    {
+        $this->replies[] = $post;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getLikedBy(): Collection
+    {
+        return $this->likedBy;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    /**
+     * @param User $user
+     * @return void
+     */
+    public function addLike(User $user): void
+    {
+        $this->likedBy[] = $user;
+    }
+
+    /**
+     * @param int $user_id
+     * @return void
+     */
+    public function removeLike(int $user_id): void
+    {
+        $user = $this->likedBy->findFirst(fn($key, $user) => $user->getId() === $user_id);
         $this->likedBy->removeElement($user);
     }
 
-    public function addLike($user)
+    /**
+     * @param int $user_id
+     * @return bool
+     */
+    public function isLikedBy(int $user_id): bool
     {
-        $this->likedBy[] = $user;
+        return $this->likedBy->exists(fn($key, $user) => $user->getId() == $user_id);
     }
 }
 
 class PostRepository extends EntityRepository
 {
-    public function getLatestPostsPaginator($page = 1, $per_page = 4)
+    /**
+     * @param int $page
+     * @param int $per_page
+     * @return Paginator
+     */
+    public function getLatestPostsPaginator(int $page = 1, int $per_page = 4): Paginator
     {
         $dql = /** @lang DQL */
             'SELECT p FROM ' . Post::class . ' p WHERE p.parent IS NULL ORDER BY p.id DESC';
@@ -76,7 +190,11 @@ class PostRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function getTotalPages($per_page)
+    /**
+     * @param int $per_page
+     * @return int
+     */
+    public function getTotalPages(int $per_page): int
     {
         $posts_total = $this->_em->getRepository(Post::class)->count(['parent' => null]);
 

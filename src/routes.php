@@ -1,4 +1,5 @@
 <?php
+/** @var $router */
 
 $router->get('/', 'posts/index');
 $router->get('/posts/create', 'posts/create')->only('auth');

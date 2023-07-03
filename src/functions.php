@@ -4,7 +4,7 @@ use Core\App;
 use Core\Database;
 use Core\Response;
 
-function dd($value)
+function dd(mixed $value): never
 {
     echo '<pre>';
     var_export($value);
@@ -12,30 +12,24 @@ function dd($value)
     exit();
 }
 
-function base_path($path)
+function base_path(string $path): string
 {
     return BASE_PATH . $path;
 }
 
-function view($path, $attributes = [])
+function view(string $path, array $attributes = []): void
 {
     extract($attributes);
     require base_path("views/$path.view.php");
 }
 
-function abort($code = Response::NOT_FOUND)
+function abort(int $code = Response::NOT_FOUND): never
 {
-    switch ($code) {
-        case Response::NOT_FOUND:
-            $message = 'Page not found';
-            break;
-        case Response::FORBIDDEN:
-            $message = 'You are not authorized for this action';
-            break;
-        default:
-            $message = '';
-            break;
-    }
+    $message = match ($code) {
+        Response::NOT_FOUND => 'Page not found',
+        Response::FORBIDDEN => 'You are not authorized for this action',
+        default => 'Unknown Error'
+    };
 
     http_response_code($code);
 
@@ -47,7 +41,7 @@ function abort($code = Response::NOT_FOUND)
     exit();
 }
 
-function authorize($condition, $status = Response::FORBIDDEN)
+function authorize(bool $condition, int $status = Response::FORBIDDEN): bool
 {
     if (!$condition) {
         abort($status);
@@ -56,23 +50,23 @@ function authorize($condition, $status = Response::FORBIDDEN)
     return true;
 }
 
-function redirect($path)
+function redirect(string $path): never
 {
     header("Location: $path");
     exit();
 }
 
-function flashed($key, $default = '')
+function flashed(string $key, mixed $default = ''): mixed
 {
     return Core\Session::get('_flash')[$key] ?? $default;
 }
 
-function old($key, $default = '')
+function old(string $key, mixed $default = ''): mixed
 {
     return Core\Session::get('old')[$key] ?? $default;
 }
 
-function validatePageNumber($page, $pages_total, $params)
+function validatePageNumber(?int $page, int $pages_total, array $params): void
 {
     if ($page < 1 || $page > $pages_total) {
         $uri = parse_url($_SERVER['REQUEST_URI'])['path'];

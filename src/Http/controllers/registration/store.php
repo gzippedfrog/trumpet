@@ -1,37 +1,32 @@
 <?php
 
 use Core\App;
-use Core\Database;
+use Core\User;
+use Doctrine\ORM\EntityManager;
 use Http\Forms\LoginForm;
 
+$username = isset($_POST['username']) ? (string)$_POST['username'] : null;
+$password = isset($_POST['password']) ? (string)$_POST['password'] : null;
 
-$form = LoginForm::validate([
-    'username' => $_POST['username'],
-    'password' => $_POST['password']
-]);
+$form = LoginForm::validate(['username' => $username, 'password' => $password]);
 
-$db = App::resolve(Database::class);
+$entityManager = App::resolve(EntityManager::class);
 
-$stmt = 'SELECT * FROM users WHERE username = :username';
-
-$user = $db->query($stmt, ['username' => $_POST['username']])->fetch();
+$user = $entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
 
 if ($user) {
-    $form->setError('password', 'User with such username already exists')->throw();
+    $form->setError('password', 'User with such username already exists')
+        ->throw();
 }
 
-$stmt = 'INSERT INTO users (username, password)
-             VALUES (:username, :password)';
+$user = new User();
+$user->setUsername($username);
+$user->setPasswordHash(password_hash($password, PASSWORD_BCRYPT));
 
-$db->query(
-    $stmt,
-    [
-        'username' => $_POST['username'],
-        'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)
-    ]
-);
+$entityManager->persist($user);
+$entityManager->flush();
 
-$_SESSION['id'] = (int) $db->connection->lastInsertId();
-$_SESSION['username'] = $_POST['username'];
+$_SESSION['id'] = $user->getId();
+$_SESSION['username'] = $user->getUsername();
 
-redirect('/');
+redirect('/?page=1');

@@ -1,7 +1,7 @@
 <?php
 
-use Core\Session;
+use Core\Authenticator;
 
-Session::destroy();
+Authenticator::logout();
 
-redirect('/');
+redirect('/?page=1');

@@ -3,7 +3,8 @@
 // TODO Implement user images
 // ✓ TODO Implement post images
 // ✓ TODO Implement pagination (maybe)
-//  TODO Add type declarations
+// ✓ TODO Add type declarations
+// ✓ TODO Add setters & getters
 
 declare(strict_types=1);
 

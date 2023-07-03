@@ -1,13 +1,19 @@
+<?php
+/**
+ * @var Core\Post $post
+ */
+?>
+
 <form method="POST" action="<?= "/posts?" . http_build_query($_GET) ?>" enctype="multipart/form-data" class="mb-16">
     <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="id" value="<?= $post->id ?>">
+    <input type="hidden" name="id" value="<?= $post->getId() ?>">
 
     <div class="space-y-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit post</h3>
 
         <textarea name="text" rows="4"
                   class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Write your thoughts here..." required><?= old('text', null) ?? $post->text ?></textarea>
+                  placeholder="Write your thoughts here..." required><?= old('text', null) ?? $post->getText() ?></textarea>
 
         <?php if (flashed('errors')['text'] ?? false): ?>
             <div class="text-sm text-red-600 dark:text-red-500">

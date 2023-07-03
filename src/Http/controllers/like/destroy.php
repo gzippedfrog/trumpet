@@ -4,11 +4,10 @@ use Core\App;
 use Core\Post;
 use Doctrine\ORM\EntityManager;
 
-$page = $_GET['page'];
-$post_id = $_POST['id'];
-$user_id = $_SESSION['id'];
+$user_id = isset($_SESSION['id']) ? (int)$_SESSION['id'] : null;
+$post_id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : null;
 
-/** @var EntityManager $entityManager */
 $entityManager = App::resolve(EntityManager::class);
 
 $post = $entityManager->find(Post::class, $post_id);

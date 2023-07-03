@@ -1,5 +1,11 @@
+<?php
+/**
+ * @var int $parent_id
+ */
+?>
+
 <form method="POST" action="<?= "/posts?" . http_build_query($_GET) ?>" enctype="multipart/form-data" class="mb-16">
-    <input type="hidden" name="parent_id" value="<?= $reply_to ?>">
+    <input type="hidden" name="parent_id" value="<?= $parent_id ?>">
 
     <div class="space-y-6">
         <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Reply to post</h3>

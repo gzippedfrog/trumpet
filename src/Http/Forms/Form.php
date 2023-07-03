@@ -6,35 +6,43 @@ use Core\ValidationException;
 
 abstract class Form
 {
-    protected $errors = [];
+    protected array $errors = [];
     public array $attributes = [];
 
     abstract public function __construct(array $attributes);
 
-    public static function validate($attributes)
+    /**
+     * @throws ValidationException
+     */
+    public static function validate(array $attributes): static
     {
         $form = new static($attributes);
 
-        return $form->hasErrors() ? $form->throw() : $form;
+        $form->hasErrors() && $form->throw();
+
+        return $form;
     }
 
-    public function throw ()
+    /**
+     * @throws ValidationException
+     */
+    public function throw(): never
     {
-        ValidationException::throw ($this->errors, $this->attributes);
+        ValidationException::throw($this->errors, $this->attributes);
     }
 
-    public function hasErrors()
+    public function hasErrors(): bool
     {
-        return (bool) count($this->errors);
+        return (bool)count($this->errors);
     }
 
 
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
 
-    public function setError($name, $description)
+    public function setError(string $name, string $description): self
     {
         $this->errors[$name] = $description;
 

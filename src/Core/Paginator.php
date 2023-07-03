@@ -4,16 +4,16 @@ namespace Core;
 
 class Paginator
 {
-    public static function getPrevPageUrl($params)
+    public static function getPrevPageUrl(array $params): string|null
     {
-        if ($params['page'] < 2) return;
+        if ($params['page'] < 2) return null;
 
         return '/?page=' . $params['page'] - 1;
     }
 
-    public static function getNextPageUrl($params, $totalPages)
+    public static function getNextPageUrl(array $params, int $totalPages): string|null
     {
-        if ($params['page'] >= $totalPages) return;
+        if ($params['page'] >= $totalPages) return null;
 
         return '/?page=' . $params['page'] + 1;
     }

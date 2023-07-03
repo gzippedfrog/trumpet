@@ -4,14 +4,23 @@ namespace Core;
 
 class Container
 {
-    protected $resolvers = [];
+    /**
+     * @var callable[]
+     */
+    protected array $resolvers = [];
 
-    public function bind($key, $resolver)
+    public function bind(string $key, callable $resolver): void
     {
         $this->resolvers[$key] = $resolver;
     }
 
-    public function resolve($key)
+    /**
+     * @template T
+     * @param class-string<T> $key
+     * @return T
+     * @throws \Exception
+     */
+    public function resolve(string $key)
     {
         if (!array_key_exists($key, $this->resolvers)) {
             throw new \Exception("Failed to find resolver with key: $key");

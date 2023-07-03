@@ -6,28 +6,27 @@ use Core\User;
 use Doctrine\ORM\EntityManager;
 use Http\Forms\PostForm;
 
-$page = $_GET['page'];
-$post_text = $_POST['text'];
-$parent_id = $_POST['parent_id'] ?? null;
-$user_id = $_SESSION['id'];
+$user_id = isset($_SESSION['id']) ? (int)$_SESSION['id'] : null;
+$post_text = isset($_POST['text']) ? (string)$_POST['text'] : null;
+$parent_id = isset($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : null;
 
 PostForm::validate(['text' => $post_text]);
 
-/** @var EntityManager $entityManager */
 $entityManager = App::resolve(EntityManager::class);
 
-$post = new Post();
 $user = $entityManager->find(User::class, $user_id);
 
-$post->text = $post_text;
-$post->author = $user;
+$post = new Post();
+$post->setText($post_text);
+$post->setAuthor($user);
 
 if ($parent_id) {
     $parent = $entityManager->find(Post::class, $parent_id);
-    $post->parent = $parent;
+    $post->setParent($parent);
 }
 
-if ($_FILES['image'] ?? false) {
+if (isset($_FILES['image'])) {
     $upload_dir = base_path("../public/images");
     $tmp_name = $_FILES['image']['tmp_name'];
 
@@ -37,7 +36,7 @@ if ($_FILES['image'] ?? false) {
 
     move_uploaded_file($tmp_name, "$upload_dir/$file_name");
 
-    $post->image = $file_name;
+    $post->setImage($file_name);
 }
 
 $entityManager->persist($post);

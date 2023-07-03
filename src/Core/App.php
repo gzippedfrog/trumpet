@@ -4,25 +4,31 @@ namespace Core;
 
 class App
 {
-    static $container;
+    static Container $container;
 
-    public static function setContainer($container)
+    public static function setContainer(Container $container): void
     {
         static::$container = $container;
     }
 
-    public static function container()
+    public static function container(): Container
     {
         return static::$container;
     }
 
-    public static function bind($key, $resolver)
+    public static function bind(string $className, callable $resolver): void
     {
-        static::container()->bind($key, $resolver);
+        static::container()->bind($className, $resolver);
     }
 
-    public static function resolve($key)
+    /**
+     * @template T
+     * @param class-string<T> $className
+     * @return T
+     * @throws \Exception
+     */
+    public static function resolve(string $className)
     {
-        return static::container()->resolve($key);
+        return static::container()->resolve($className);
     }
 }

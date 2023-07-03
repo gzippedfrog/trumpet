@@ -2,18 +2,19 @@
 
 namespace Core;
 
+use Doctrine\ORM\EntityManager;
+
 class Authenticator
 {
-    public function attempt($username, $password)
+    public static function attempt(string $username, string $password): bool
     {
-        $db = App::resolve(Database::class);
+        $entityManager = App::resolve(EntityManager::class);
 
-        $stmt = 'SELECT * FROM users WHERE username = :username';
+        $user = $entityManager->getRepository(User::class)
+            ->findOneBy(['username' => $username]);
 
-        $user = $db->query($stmt, ['username' => $username])->fetch();
-
-        if ($user && password_verify($password, $user['password'])) {
-            $this->login($user);
+        if ($user && password_verify($password, $user->getPasswordHash())) {
+            self::login($user);
 
             return true;
         }
@@ -21,13 +22,13 @@ class Authenticator
         return false;
     }
 
-    protected function login($user)
+    protected static function login(User $user): void
     {
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+        Session::put('id', $user->getId());
+        Session::put('username', $user->getUsername());
     }
 
-    public function logout()
+    public static function logout(): void
     {
         Session::destroy();
     }

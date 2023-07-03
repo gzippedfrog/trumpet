@@ -5,17 +5,16 @@ use Core\Paginator;
 use Core\Post;
 use Doctrine\ORM\EntityManager;
 
+$user_id = isset($_SESSION['id']) ? (int)$_SESSION['id'] : null;
+$edit_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : null;
 $per_page = 4;
-$page = $_GET['page'] ?? null;
-$user_id = $_SESSION['id'] ?? null;
-$edit_id = $_GET['id'] ?? null;
 
-/** @var EntityManager $entityManager */
 $entityManager = App::resolve(EntityManager::class);
 
-$post_to_edit = $entityManager->find(Post::class, $edit_id);
+$post = $entityManager->find(Post::class, $edit_id);
 
-authorize($user_id === $post_to_edit->author->id);
+authorize($user_id === $post->getAuthor()->getId());
 
 $pages_total = $entityManager->getRepository(Post::class)->getTotalPages($per_page);
 
@@ -23,10 +22,14 @@ validatePageNumber($page, $pages_total, $_GET);
 
 $posts = $entityManager->getRepository(Post::class)->getLatestPostsPaginator($page, $per_page);
 
-$prevPageUrl = Paginator::getPrevPageUrl($_GET);
-$nextPageUrl = Paginator::getNextPageUrl($_GET, $pages_total);
-
 view(
     'index',
-    compact(['posts', 'post_to_edit', 'page', 'user_id', 'prevPageUrl', 'nextPageUrl'])
+    [
+        'posts' => $posts,
+        'post_to_edit' => $post,
+        'page' => $page,
+        'user_id' => $user_id,
+        'prevPageUrl' => Paginator::getPrevPageUrl($_GET),
+        'nextPageUrl' => Paginator::getNextPageUrl($_GET, $pages_total)
+    ]
 );
