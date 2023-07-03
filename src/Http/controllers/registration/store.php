@@ -1,6 +1,7 @@
 <?php
 
 use Core\App;
+use Core\Authenticator;
 use Core\User;
 use Doctrine\ORM\EntityManager;
 use Http\Forms\LoginForm;
@@ -26,7 +27,6 @@ $user->setPasswordHash(password_hash($password, PASSWORD_BCRYPT));
 $entityManager->persist($user);
 $entityManager->flush();
 
-$_SESSION['id'] = $user->getId();
-$_SESSION['username'] = $user->getUsername();
+Authenticator::login($user);
 
 redirect('/?page=1');

@@ -7,8 +7,17 @@ use Core\Middleware\Guest;
 
 class Router
 {
-    protected array $routes = [];
+    /**
+     * @var array
+     */
+    private array $routes = [];
 
+    /**
+     * @param string $method
+     * @param string $uri
+     * @param string $controller
+     * @return $this
+     */
     public function add(string $method, string $uri, string $controller): self
     {
         $this->routes[] = [
@@ -21,26 +30,50 @@ class Router
         return $this;
     }
 
+    /**
+     * @param string $uri
+     * @param string $controller
+     * @return $this
+     */
     public function get(string $uri, string $controller): self
     {
         return $this->add('GET', $uri, $controller);
     }
 
+    /**
+     * @param string $uri
+     * @param string $controller
+     * @return $this
+     */
     public function post(string $uri, string $controller): self
     {
         return $this->add('POST', $uri, $controller);
     }
 
+    /**
+     * @param string $uri
+     * @param string $controller
+     * @return $this
+     */
     public function delete(string $uri, string $controller): self
     {
         return $this->add('DELETE', $uri, $controller);
     }
 
+    /**
+     * @param string $uri
+     * @param string $controller
+     * @return $this
+     */
     public function patch(string $uri, string $controller): self
     {
         return $this->add('PATCH', $uri, $controller);
     }
 
+    /**
+     * @param string $key
+     * @return $this
+     */
     public function only(string $key): self
     {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;

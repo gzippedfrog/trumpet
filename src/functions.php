@@ -1,9 +1,11 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\Response;
 
+/**
+ * @param mixed $value
+ * @return never
+ */
 function dd(mixed $value): never
 {
     echo '<pre>';
@@ -12,17 +14,30 @@ function dd(mixed $value): never
     exit();
 }
 
+/**
+ * @param string $path
+ * @return string
+ */
 function base_path(string $path): string
 {
     return BASE_PATH . $path;
 }
 
+/**
+ * @param string $path
+ * @param array $attributes
+ * @return void
+ */
 function view(string $path, array $attributes = []): void
 {
     extract($attributes);
     require base_path("views/$path.view.php");
 }
 
+/**
+ * @param int $code
+ * @return never
+ */
 function abort(int $code = Response::NOT_FOUND): never
 {
     $message = match ($code) {
@@ -41,6 +56,11 @@ function abort(int $code = Response::NOT_FOUND): never
     exit();
 }
 
+/**
+ * @param bool $condition
+ * @param int $status
+ * @return bool
+ */
 function authorize(bool $condition, int $status = Response::FORBIDDEN): bool
 {
     if (!$condition) {
@@ -50,22 +70,42 @@ function authorize(bool $condition, int $status = Response::FORBIDDEN): bool
     return true;
 }
 
+/**
+ * @param string $path
+ * @return never
+ */
 function redirect(string $path): never
 {
     header("Location: $path");
     exit();
 }
 
+/**
+ * @param string $key
+ * @param mixed $default
+ * @return mixed
+ */
 function flashed(string $key, mixed $default = ''): mixed
 {
     return Core\Session::get('_flash')[$key] ?? $default;
 }
 
+/**
+ * @param string $key
+ * @param mixed $default
+ * @return mixed
+ */
 function old(string $key, mixed $default = ''): mixed
 {
     return Core\Session::get('old')[$key] ?? $default;
 }
 
+/**
+ * @param int|null $page
+ * @param int $pages_total
+ * @param array $params
+ * @return void
+ */
 function validatePageNumber(?int $page, int $pages_total, array $params): void
 {
     if ($page < 1 || $page > $pages_total) {

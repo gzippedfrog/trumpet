@@ -29,11 +29,6 @@ class User
         $this->createdPosts = new ArrayCollection();
     }
 
-    public function addPost(Post $post): void
-    {
-        $this->createdPosts[] = $post;
-    }
-
     /**
      * @return int|null
      */
@@ -77,16 +72,16 @@ class User
     /**
      * @return Collection
      */
-    public function getCreatedPosts(): Collection
+    public function getPosts(): Collection
     {
         return $this->createdPosts;
     }
 
     /**
-     * @param Collection $createdPosts
+     * @param Post $post
      */
-    public function setCreatedPosts(Collection $createdPosts): void
+    public function addPost(Post $post): void
     {
-        $this->createdPosts = $createdPosts;
+        $this->createdPosts[] = $post;
     }
 }

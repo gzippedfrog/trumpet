@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var string $prevPageUrl
+ * @var string $nextPageUrl
+ */
+?>
+
 <div class="w-52 flex gap-3 mx-auto">
     <?php if ($prevPageUrl ?? null): ?>
         <a href="<?= $prevPageUrl ?>"

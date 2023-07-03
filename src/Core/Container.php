@@ -9,6 +9,11 @@ class Container
      */
     protected array $resolvers = [];
 
+    /**
+     * @param string $key
+     * @param callable $resolver
+     * @return void
+     */
     public function bind(string $key, callable $resolver): void
     {
         $this->resolvers[$key] = $resolver;
