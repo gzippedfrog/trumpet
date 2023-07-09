@@ -38,7 +38,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (25,26),(28,26),(25,27),(11,28),(25,28),(11,29),(11,30),(13,30),(25,30),(13,31),(11,36),(11,46),(24,46),(11,56),(11,62),(28,62),(11,67),(11,84);
+INSERT INTO `likes` VALUES (3,1),(3,2),(2,3),(3,3),(4,3),(5,3),(4,4),(2,5),(3,5),(4,5),(2,6),(4,7),(1,8),(4,8),(5,8),(1,9),(5,9);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `posts` (
   KEY `FK_posts` (`parent_id`),
   CONSTRAINT `FK_posts` FOREIGN KEY (`parent_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_users_posts` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (26,'HOPE',24,NULL,NULL),(27,'YES WE CAN!',24,NULL,NULL),(28,'I\'ll have two number 9s, a number 9 large, a number 6 with extra dip, a number 7, two number 45s, one with cheese, and a large soda',25,NULL,NULL),(29,'Sleepy Joe',13,28,NULL),(30,'MAGA',13,NULL,NULL),(31,'I hate being bipolar, it\'s awesome!',11,NULL,NULL),(36,'I know right',11,31,NULL),(46,' I\'m in Sydney',11,NULL,'647bab40b805d.jpg'),(56,'vertical image test!',11,NULL,'647e2f5c1a6d7.jpg'),(58,'comment #1',11,56,NULL),(59,'comment #23',11,56,NULL),(60,'post',24,NULL,NULL),(61,'comment comment comment ',25,60,NULL),(62,'post #2',13,NULL,NULL),(63,'comment comment comment #2',25,62,NULL),(67,'asdasda',27,62,NULL),(73,'yeeeeeeeeeees!!!!',11,31,'6499c598a058e.'),(84,'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz!',11,62,'64a2c5d398fd3.');
+INSERT INTO `posts` VALUES (1,'HOPE',1,NULL,NULL),(2,'YES WE CAN!',1,NULL,NULL),(3,'I\'ll have two number 9s, a number 9 large, a number 6 with extra dip, a number 7, two number 45s, one with cheese, and a large soda',3,NULL,NULL),(4,'Sleepy Joe',2,3,NULL),(5,'MAGA',2,NULL,NULL),(6,'I hate being bipolar, it\'s awesome!',4,NULL,NULL),(7,'I know right',4,6,NULL),(8,' Sydney is beautiful. BTW I\'m a genius and the greatest rapper of the generation',4,NULL,'647bab40b805d.jpg'),(9,'Check out this photo',2,NULL,'64ab23de545a9.jpg'),(10,'Was there on vacation with my wife last year',1,9,NULL),(11,'Now I have my twitter clone too 😉',5,NULL,NULL),(12,'My favorite city',5,8,NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `users` (
   `password_hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UQ_users_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (11,'kanye','$2y$10$VuvoyD/wthQKIs1/bB3oJueqn9/QOBWP.hFWcP39cOcnrhCcHBeta'),(13,'donald','$2y$10$8QOGmMoxuf5RLmbXmB8m3enJS.QZ/M56Ku0fbznLWKvkGLUbaVOmC'),(24,'obama','$2y$10$PAvs6IjaS6JljfzLD3ApnuUtlGcjtl92MC4BqChWJM5V2xre0rfhO'),(25,'biden','$2y$10$Mw36d4k1Zts47b.FR7WoGOD2DJ87BAD7V8zllqxUyY1oW25bLq/Eu'),(26,'donald2','$2y$10$YMdcwbEPhFwISIl/3KDEW.pdsyeBpECHkj7SVsSDDHF8lkpBymRAi'),(27,'donald3','$2y$10$S7ayeMEshUfW.EjJss.iWekaHkZDckLDmKH/sYRDvjZvRYsZx5Rxi'),(28,'mario','$2y$10$aTOClYrfTfaBoEJQs5f3Mu1KrdWKvJXcJ76s7DYBI7uZBEX5HmVrC');
+INSERT INTO `users` VALUES (1,'obama','$2y$10$PAvs6IjaS6JljfzLD3ApnuUtlGcjtl92MC4BqChWJM5V2xre0rfhO'),(2,'donald','$2y$10$8QOGmMoxuf5RLmbXmB8m3enJS.QZ/M56Ku0fbznLWKvkGLUbaVOmC'),(3,'biden','$2y$10$Mw36d4k1Zts47b.FR7WoGOD2DJ87BAD7V8zllqxUyY1oW25bLq/Eu'),(4,'kanye','$2y$10$VuvoyD/wthQKIs1/bB3oJueqn9/QOBWP.hFWcP39cOcnrhCcHBeta'),(5,'zuck','$2y$10$Qe3quGwJzy4klfdZGPCPA.YeWfdKrsqEcq2.iwJy4BtRZA5q9Dxvm');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -108,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-09 23:23:48
+-- Dump completed on 2023-07-10  0:43:22
