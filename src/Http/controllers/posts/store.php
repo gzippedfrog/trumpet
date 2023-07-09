@@ -26,7 +26,7 @@ if ($parent_id) {
     $post->setParent($parent);
 }
 
-if (isset($_FILES['image'])) {
+if (!empty($_FILES['image']['size'])) {
     $upload_dir = base_path("../public/images");
     $tmp_name = $_FILES['image']['tmp_name'];
 
