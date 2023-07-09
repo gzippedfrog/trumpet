@@ -33,3 +33,7 @@ import db
 ```bash
 mysql -u <username> -p <db_name> < trumpet_dump.sql
 ```
+start server
+```bash
+php -S 127.0.0.1:8000 -t public            
+```

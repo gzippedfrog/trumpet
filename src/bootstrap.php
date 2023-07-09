@@ -21,7 +21,7 @@ $container->bind(EntityManager::class, function () {
         'driver' => 'pdo_mysql',
         'user' => 'root',
         'password' => '',
-        'dbname' => 'trumpet',
+        'dbname' => 'trumpet_test',
     ];
 
     $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
